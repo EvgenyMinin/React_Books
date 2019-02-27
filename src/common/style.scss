@@ -1,4 +1,139 @@
-$h3color: red;
-.project__title {
-    color: $h3color;
+$asideColor: #1f2637;
+$titleColor: #444c63;
+$headerColor: #eef1f7;
+$textColor: #8c97b2;
+$borderColor: #dadfea;
+$buttonColor: #f2795a;
+$whiteTextColor: #fff;
+$authorTextColor: #6f7d95;
+$sideBarBorderColor: #323949;
+$menuTextColor: #78829d;
+$menuActiveItemColor: #15a4fa;
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    &__sidebar {
+        flex: 1.4;
+        background-color: $asideColor;
+        min-height: 100vh;
+    }
+    &__container {
+        flex: 10.6;
+        background-color: #fff;
+    }
+}
+
+.header {
+    &__title {
+        font-weight: bold;
+        color: $titleColor;
+        font-size: 22px;
+        padding: 18px 20px;
+        background-color: $headerColor;
+        margin: 0;
+    }
+    &__nav {
+        display: flex;
+        border-top: 1px solid $borderColor;
+        border-bottom: 1px solid $borderColor;
+        padding: 0 20px;
+        background-color: $headerColor;
+        &--search {
+            color: $textColor;
+            font-size: 13px;
+            padding: 0 20px;
+            margin: 10px 0;
+            border: 1px solid #c7cddb;
+            border-radius: 50px;
+            background-image: url(../img/search.png);
+            background-repeat:no-repeat;
+            background-position: 90% center;
+            outline: 0;
+        }
+    }
+}
+
+.nav {
+    flex: 1;
+    &__list {
+        display: flex;
+        padding: 0;
+    }
+    &__item {
+        list-style-type: none;
+        margin-right: 3vh;
+        & a {
+            text-decoration: none;
+            color: $textColor;
+            font-family: Myriad Pro;
+        }
+    }
+}
+
+.sidebar {
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+    margin: 35px 0 0 0;
+    padding-bottom: 38px;
+    border-bottom: 1px solid $sideBarBorderColor;
+    &__button {
+        background-color: $buttonColor;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: bold;
+        color: $whiteTextColor;
+        padding: 14px 25px;
+        padding-bottom: 10px;
+    }
+}
+
+.content {
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.book {
+    margin-right: 20px;
+    padding-top: 30px;
+    &__title {
+        font-size: 16px;
+        font-weight: bold;
+        color: $titleColor;
+        padding-top: 16px;
+    }
+    &__author {
+        color: $authorTextColor;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+}
+
+.menu-buttons {
+    border-bottom: 1px solid $sideBarBorderColor;
+    &__block {
+        padding: 0;
+        margin: 0;
+    }
+    &__item {
+        list-style-type: none;
+        color: $menuTextColor;
+        font-size: 13px;
+        padding: 14px 20px;
+        &--active {
+            list-style-type: none;
+            color: $whiteTextColor;
+            font-size: 13px;
+            padding: 14px 20px;
+            background-color: $menuActiveItemColor;
+        }
+    }
 }
