@@ -1,0 +1,24 @@
+$authorTextColor: #6f7d95;
+$titleColor: #444c63;
+
+.book-item {
+    margin-right: 20px;
+    padding-top: 30px;
+    &__title {
+        font-size: 16px;
+        font-weight: bold;
+        color: $titleColor;
+        padding-top: 16px;
+    }
+    &__author {
+        color: $authorTextColor;
+        font-size: 12px;
+        padding-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1320px) {
+    .book-item {
+        margin-right: 0;
+    }
+}

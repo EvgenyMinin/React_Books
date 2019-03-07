@@ -1,11 +1,10 @@
 $asideColor: #1f2637;
-$titleColor: #444c63;
 $headerColor: #eef1f7;
+$titleColor: #444c63;
 $textColor: #8c97b2;
 $borderColor: #dadfea;
 $buttonColor: #f2795a;
 $whiteTextColor: #fff;
-$authorTextColor: #6f7d95;
 $sideBarBorderColor: #323949;
 $menuTextColor: #78829d;
 $menuActiveItemColor: #15a4fa;
@@ -101,22 +100,6 @@ body {
     flex-wrap: wrap;
 }
 
-.book {
-    margin-right: 20px;
-    padding-top: 30px;
-    &__title {
-        font-size: 16px;
-        font-weight: bold;
-        color: $titleColor;
-        padding-top: 16px;
-    }
-    &__author {
-        color: $authorTextColor;
-        font-size: 12px;
-        padding-top: 10px;
-    }
-}
-
 .menu-buttons {
     border-bottom: 1px solid $sideBarBorderColor;
     &__block {
@@ -146,9 +129,6 @@ body {
         &__container {
             flex: 10.2;
         }
-    }
-    .book {
-        margin-right: 0;
     }
     .content {
         padding: 0 20px;
