@@ -2,7 +2,6 @@ $authorTextColor: #6f7d95;
 $titleColor: #444c63;
 
 .book-item {
-    margin-right: 20px;
     padding-top: 30px;
     &__title {
         font-size: 16px;
@@ -17,13 +16,20 @@ $titleColor: #444c63;
     }
 }
 
-.widget-svg {
-    width: 16px;
-    height: 16px;
-}
-
-@media screen and (max-width: 1320px) {
+@media screen and (max-width: 760px) {
     .book-item {
-        margin-right: 0;
+        padding-top: 15px;
+        &__logo {
+            width: 250px;
+            & img {
+                width: 100%;
+            }
+        }
+        &__title {
+            padding-top: 5px;
+        }
+        &__author {
+            padding-top: 5px;
+        }
     }
 }

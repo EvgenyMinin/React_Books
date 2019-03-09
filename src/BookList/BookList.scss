@@ -1,3 +1,10 @@
 .book-list {
-    width: 225px;
+    width: 200px;
+    margin-left: 20px;
+}
+
+@media screen and (max-width: 760px) {
+    .book-list {
+        margin-right: 45px;
+    }
 }

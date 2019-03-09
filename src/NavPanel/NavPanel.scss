@@ -27,18 +27,17 @@ $textColor: #8c97b2;
     align-items: center;
     flex: 1;
     padding: 12px 0;
-    &__buttons {
-        &--item {
-            cursor: pointer;
-            background-color: inherit;
-            border: 0;
-            align-items: center;
-            margin-right: 3vh;
-            color: $textColor;
-            font-family: Myriad Pro;
-            &:focus {
-                outline: 0;
-            }
+    &__buttons--item {
+        cursor: pointer;
+        background-color: inherit;
+        border: 0;
+        align-items: center;
+        margin-right: 3vh;
+        color: $textColor;
+        font-size: 12px;
+        font-family: Myriad Pro;
+        &:focus {
+            outline: 0;
         }
     }
 }
@@ -62,19 +61,18 @@ $textColor: #8c97b2;
                 font-size: 12px;
             }
         }
-    }
-    .nav-panel {
-        &__search {
-            width: 120px;
+        &__buttons--item {
+            margin-right: 5px
         }
+    }
+    .nav-panel__search {
+        width: 120px;
     }
 }
 
 @media screen and (max-width: 786px) {
-    .nav {
-        &__item {
-            margin-right: 1vh;
-        }
+    .nav__item {
+        margin-right: 1vh;
     }
 }
 
@@ -90,5 +88,8 @@ $textColor: #8c97b2;
                 font-size: 12px;
             }
         }
+    }
+    .active {
+        padding: 3px 10px;
     }
 }

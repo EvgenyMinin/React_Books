@@ -18,25 +18,25 @@ body {
 .wrapper {
     display: flex;
     &__sidebar {
-        flex: 1.4;
+        position: fixed;
+        width: 200px;
         background-color: $asideColor;
         min-height: 100vh;
     }
     &__container {
-        flex: 10.6;
+        margin-left: 200px;
         background-color: #fff;
+        width: 100%;
     }
 }
 
-.header {
-    &__title {
-        font-weight: bold;
-        color: $titleColor;
-        font-size: 22px;
-        padding: 18px 20px;
-        background-color: $headerColor;
-        margin: 0;
-    }
+.header__title {
+    font-weight: bold;
+    color: $titleColor;
+    font-size: 22px;
+    padding: 18px 20px;
+    background-color: $headerColor;
+    margin: 0;
 }
 
 .sidebar {
@@ -59,7 +59,6 @@ body {
 }
 
 .content {
-    padding: 0 20px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -85,53 +84,14 @@ body {
     }
 }
 
-@media screen and (max-width: 1320px) {
-    .wrapper {
-        &__sidebar {
-            flex: 1.8;
-        }
-        &__container {
-            flex: 10.2;
-        }
-    }
-    .content {
-        padding: 0 20px;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
-}
-
-@media screen and (max-width: 861px) {
-    .wrapper {
-        &__sidebar {
-            flex: 2;
-        }
-        &__container {
-            flex: 5;
-        }
-    }
-    .content {
-        padding: 0 20px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+@media screen and (max-width: 889px) {
+    .nav__buttons--item {
+        margin-right: 5px;
     }
 }
 
 @media screen and (max-width: 760px) {
-    .wrapper {
-        &__sidebar {
-            flex: 2;
-        }
-        &__container {
-            flex: 5;
-        }
-    }
-    .content {
-        padding: 0 20px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
+    .sidebar {
+        margin-top: 30px;
     }
 }
