@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BookItem from '../BookItem';
 import book1 from '../img/Image.png';
 import book2 from '../img/Image-1.png';
 import book3 from '../img/Image-2.png';
@@ -10,24 +9,27 @@ import book7 from '../img/Image-6.png';
 import book8 from '../img/Image-7.png';
 import book9 from '../img/Image-8.png';
 import book10 from '../img/Image-9.png';
+import NavPanel from '../NavPanel';
+import BookList from '../BookList';
 import './App.scss';
 
 class App extends Component {
 
     maxId = 1;
-    createBook = (logo, title, author) => {
+    createBook = (logo, title, author, isFree = false) => {
         return {
             id: this.maxId++,
             logo,
             title,
             author,
+            isFree,
             rating: 0
         }
     }
 
     state = {
         books: [
-            this.createBook(book1, 'Jewels of Nizam', 'by Geeta Devi'),
+            this.createBook(book1, 'Jewels of Nizam', 'by Geeta Devi', true),
             this.createBook(book2, 'Cakes & Bakes', 'by Sanjeev Kapoor'),
             this.createBook(book3, 'Jamie’s Kitchen', 'by Jamie Oliver'),
             this.createBook(book4, 'Inexpensive Family Meals', 'by Simon Holst'),
@@ -37,24 +39,51 @@ class App extends Component {
             this.createBook(book8, 'Jamie Does', 'by Jamie Oliver'),
             this.createBook(book9, 'Jamie’s italy', 'by Jamie Oliver'),
             this.createBook(book10, 'Vegetables Cookbook', 'by Matthew Biggs'),
-        ]
+        ],
+        selectFilter: 'all'
     }
+
+    handleFilterChange = (selectFilter) => {
+        this.setState({
+            selectFilter
+        });
+    }
+
+    getFilteredBook = (books, selectFilter) => {
+        switch(selectFilter) {
+            case 'all':
+                return books;
+            case 'recent':
+                return books.slice(0, 6);
+            case 'popular':
+                return books.filter(book => book.rating >= 4.5);
+            case 'free':
+                return books.filter(book => book.isFree === true)
+            default:
+                return books;
+        }
+    }
+
+    handleChangeRating = (id, newRating) => {
+        const books = [...this.state.books];
+        const index = books.findIndex(b => b.id === id);
+        const book = {...books[index]};
+        book.rating = newRating;
+        books[index] = book;
+        this.setState({
+            books
+        });
+    }
+
     render() {
-        const books = this.state.books.map(book => (
-            <div className="book" key={book.id} >
-                <BookItem 
-                    logo={book.logo}
-                    title={book.title}
-                    author={book.author}
-                />
-            </div>
-        ));
+        const { books, selectFilter } = this.state;
+        const showBooks = this.getFilteredBook(books, selectFilter);
         return (
             <div className="wrapper">
                 <div className='wrapper__sidebar'>
                     <div className="sidebar">
                         <button className="sidebar__button">
-                            + ADD A BOOK
+                            <i className="fa fa-plus" /> ADD A BOOK
                         </button>
                     </div>
                     <div className="menu-buttons">
@@ -70,25 +99,21 @@ class App extends Component {
                 <div className='wrapper__container'>
                     <div className="header">
                         <h2 className="header__title">Browse Available Books</h2>
-                        <div className="header__nav">
-                            <div className="nav">
-                                <ul className="nav__list">
-                                    <li className="nav__item"><a style={{color: 'white', backgroundColor: '#97b3ce', borderRadius: '20px', padding:'5px 20px'}} href="#">All Books</a></li>
-                                    <li className="nav__item"><a href="#">Most Recent</a></li>
-                                    <li className="nav__item"><a href="#">Most Popular</a></li>
-                                    <li className="nav__item"><a href="#">Free Books</a></li>
-                                </ul>
-                            </div>
-                            <input className="header__nav--search" placeholder="Enter Keywords" />
-                        </div>
+                        <NavPanel
+                            getFilteredBook={selectFilter}
+                            onFilterChange={this.handleFilterChange}
+                        />
                     </div>
                     <div className="content">
-                        { books }
+                        <BookList
+                            books={showBooks}
+                            onChangeRating={this.handleChangeRating}
+                        />
                     </div>
                 </div>
             </div>
         );
     }
 }
- 
+
 export default App;

@@ -37,42 +37,6 @@ body {
         background-color: $headerColor;
         margin: 0;
     }
-    &__nav {
-        display: flex;
-        border-top: 1px solid $borderColor;
-        border-bottom: 1px solid $borderColor;
-        padding: 0 20px;
-        background-color: $headerColor;
-        &--search {
-            color: $textColor;
-            font-size: 13px;
-            padding: 0 20px;
-            margin: 10px 0;
-            border: 1px solid #c7cddb;
-            border-radius: 50px;
-            background-image: url(../img/search.png);
-            background-repeat:no-repeat;
-            background-position: 90% center;
-            outline: 0;
-        }
-    }
-}
-
-.nav {
-    flex: 1;
-    &__list {
-        display: flex;
-        padding: 0;
-    }
-    &__item {
-        list-style-type: none;
-        margin-right: 3vh;
-        & a {
-            text-decoration: none;
-            color: $textColor;
-            font-family: Myriad Pro;
-        }
-    }
 }
 
 .sidebar {
@@ -147,38 +111,11 @@ body {
             flex: 5;
         }
     }
-    .nav {
-        flex: 5;
-        &__list {
-            display: flex;
-        }
-        &__item {
-            margin-right: 2vh;
-            a {
-                font-size: 12px;
-            }
-        }
-    }
-    .header {
-        &__nav {
-            &--search {
-                width: 120px;
-            }
-        }
-    }
     .content {
         padding: 0 20px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-    }
-}
-
-@media screen and (max-width: 786px) {
-    .nav {
-        &__item {
-            margin-right: 1vh;
-        }
     }
 }
 
@@ -189,25 +126,6 @@ body {
         }
         &__container {
             flex: 5;
-        }
-    }
-    .nav {
-        flex: 5;
-        &__list {
-            display: flex;
-        }
-        &__item {
-            margin-right: 1vh;
-            a {
-                font-size: 12px;
-            }
-        }
-    }
-    .header {
-        &__nav {
-            &--search {
-                width: 120px;
-            }
         }
     }
     .content {
