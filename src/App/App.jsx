@@ -40,7 +40,16 @@ class App extends Component {
             this.createBook(book9, 'Jamie’s italy', 'by Jamie Oliver'),
             this.createBook(book10, 'Vegetables Cookbook', 'by Matthew Biggs'),
         ],
-        selectFilter: 'all'
+        selectFilter: 'all',
+        searchBook: ''
+    }
+
+    search = (books, searchBook) => {
+        if (searchBook.length === 0) return books;
+        return books.filter( b => b.title
+            .toLowerCase()
+            .indexOf(searchBook.toLowerCase()) > -1
+        );
     }
 
     handleFilterChange = (selectFilter) => {
@@ -50,7 +59,7 @@ class App extends Component {
     }
 
     getFilteredBook = (books, selectFilter) => {
-        switch(selectFilter) {
+        switch(selectFilter) { 
             case 'all':
                 return books;
             case 'recent':
@@ -75,9 +84,17 @@ class App extends Component {
         });
     }
 
+    handleSearchChange = (searchBook) => {
+        this.setState({
+            searchBook
+        })
+    }
+
     render() {
-        const { books, selectFilter } = this.state;
-        const showBooks = this.getFilteredBook(books, selectFilter);
+        const { books, selectFilter, searchBook } = this.state;
+        const visibleBooks = this.getFilteredBook(
+            this.search(books, searchBook), selectFilter
+        );
         return (
             <div className="wrapper">
                 <div className='wrapper__sidebar'>
@@ -102,11 +119,12 @@ class App extends Component {
                         <NavPanel
                             getFilteredBook={selectFilter}
                             onFilterChange={this.handleFilterChange}
+                            onSearchChange={this.handleSearchChange}
                         />
                     </div>
                     <div className="content">
                         <BookList
-                            books={showBooks}
+                            books={visibleBooks}
                             onChangeRating={this.handleChangeRating}
                         />
                     </div>

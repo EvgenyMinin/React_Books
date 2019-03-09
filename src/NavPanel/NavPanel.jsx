@@ -3,6 +3,10 @@ import './NavPanel.scss';
 
 class NavPanel extends Component {
 
+    state = {
+        searchBook: ''
+    }
+
     buttons = [
         { name: 'all', label: 'All Books' },
         { name: 'recent', label: 'Most Recent' },
@@ -10,8 +14,17 @@ class NavPanel extends Component {
         { name: 'free', label: 'Free Books' },
     ];
 
+    handleOnChange = (event) => {
+        const searchBook = event.target.value;
+        this.setState({
+            searchBook
+        });
+        this.props.onSearchChange(searchBook);
+    }
+
     render() {
         const { getFilteredBook, onFilterChange } = this.props;
+        const { searchBook } = this.state;
         const buttons = this.buttons.map(({name, label}) => {
             const isActive = getFilteredBook === name;
             const className = isActive ? 'active' : '';
@@ -32,7 +45,12 @@ class NavPanel extends Component {
                         {buttons}
                     </div>
                 </div>
-                <input className="nav-panel__search" placeholder="Enter Keywords" />
+                <input
+                    className="nav-panel__search"
+                    placeholder="Enter Keywords"
+                    value={searchBook}
+                    onChange={this.handleOnChange}
+                />
             </div>
         );
     }
