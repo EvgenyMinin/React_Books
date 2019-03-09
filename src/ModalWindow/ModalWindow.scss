@@ -1,0 +1,45 @@
+$bgcolor: #eef1f8;
+$textColor: #41485b;
+$bgCancelButtonColor: #96b4ce;
+$bgAddButtonColor: #f2795a;
+
+.modal-window {
+    &__label {
+        font-weight: bold;
+        font-size: 12px;
+    }
+    &__input {
+        padding: 3px 6px;
+    }
+    &__header {
+        background-color: $bgcolor;
+        font-weight: bold;
+        font-size: 22px;
+        color: $textColor;
+    }
+    &__footer {
+        background-color: $bgcolor;
+    }
+    &__cancel-button {
+        background-color: $bgCancelButtonColor;
+        border: 0;
+        font-size: 14px;
+        font-weight: bold;
+        &:hover {
+            background-color: #748ea5;
+        }
+    }
+    &__add-button {
+        background-color: $bgAddButtonColor;
+        border: 0;
+        font-size: 14px;
+        font-weight: bold;
+        &:hover {
+            background-color: #da5837;
+        }
+    }
+    &__items {
+        display: flex;
+        justify-content: space-between;
+    }
+}
