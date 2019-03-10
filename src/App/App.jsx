@@ -121,10 +121,6 @@ class App extends Component {
             ];
             return {
                 books: newBooksArray,
-                newBookData: {
-                    title: '',
-                    author: ''
-                }
             }
         });
     }
@@ -168,11 +164,11 @@ class App extends Component {
                     openInfoModal={this.addInfoModal}
                 />
                 <Modal isOpen={isOpenInfoModal} toggle={this.addInfoModal}>
-                    <ModalBody>
-                        Книга успешно добавлена
+                    <ModalBody className="app__modalBody">
+                        The book "{this.state.newBookData.title}" successfully added
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="secondary" onClick={this.addInfoModal}>Cancel</Button>
+                    <ModalFooter className="modal-window__footer">
+                        <Button className="modal-window__add-button" onClick={this.addInfoModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
                 <div className='wrapper__container'>

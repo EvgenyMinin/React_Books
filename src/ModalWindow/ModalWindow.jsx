@@ -7,8 +7,14 @@ const ModalWindow = ({
     isOpenModal,
     modal,
     onSubmit,
-    onChange
+    onChange,
+    openInfoModal
 }) => {
+    const click = (e) => {
+        onSubmit(e);
+        modal();
+        openInfoModal();
+    }
     return (
         <Modal isOpen={isOpenModal} toggle={modal}>
             <ModalHeader toggle={modal} className="modal-window__header">
@@ -84,7 +90,7 @@ const ModalWindow = ({
             </ModalBody>
             <ModalFooter className="modal-window__footer">
                 <Button className="modal-window__cancel-button" onClick={modal}>CANCEL</Button>{' '}
-                <Button className="modal-window__add-button"  onClick={onSubmit}>ADD BOOK</Button>
+                <Button className="modal-window__add-button"  onClick={click}>ADD BOOK</Button>
             </ModalFooter>
         </Modal>
     );

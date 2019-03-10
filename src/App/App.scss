@@ -4,13 +4,14 @@ $titleColor: #444c63;
 $textColor: #8c97b2;
 $borderColor: #dadfea;
 $buttonColor: #f2795a;
+$buttonColorHover: #da5837;
 $whiteTextColor: #fff;
 $sideBarBorderColor: #323949;
 $menuTextColor: #78829d;
 $menuActiveItemColor: #15a4fa;
 
 body {
-    padding: 0;
+    padding: 0 !important;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -59,6 +60,9 @@ body {
         &:focus {
             outline: 0;
         }
+        &:hover {
+            background-color: $buttonColorHover;
+        }
     }
 }
 
@@ -86,6 +90,13 @@ body {
             background-color: $menuActiveItemColor;
         }
     }
+}
+
+.app__modalBody {
+    color: $titleColor;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
 }
 
 @media screen and (max-width: 889px) {
