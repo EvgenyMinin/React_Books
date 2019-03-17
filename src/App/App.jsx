@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import book0 from '../img/book0.png';
 import book1 from '../img/Image.png';
 import book2 from '../img/Image-1.png';
 import book3 from '../img/Image-2.png';
@@ -13,7 +12,6 @@ import book10 from '../img/Image-9.png';
 import NavPanel from '../NavPanel';
 import BookList from '../BookList';
 import ModalWindow from '../ModalWindow/ModalWindow';
-import { Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import './App.scss';
 
 class App extends Component {
@@ -46,11 +44,6 @@ class App extends Component {
         selectFilter: 'all',
         searchBook: '',
         isOpenNewBookModal: false,
-        isOpenInfoModal: false,
-        newBookData: {
-            title: '',
-            author: ''
-        }
     }
 
     search = (books, searchBook) => {
@@ -99,21 +92,14 @@ class App extends Component {
         })
     }
 
-    addNewBookModal = () => {
+    handleShowNewBookModal = () => {
         this.setState({
             isOpenNewBookModal: !this.state.isOpenNewBookModal
         });
     }
 
-    addInfoModal = () => {
-        this.setState({
-            isOpenInfoModal: !this.state.isOpenInfoModal
-        });
-    }
-
-    handleAddBookSubmit = (event) => {
-        event.preventDefault();
-        const newBook = this.createBook(book0, this.state.newBookData.title, this.state.newBookData.author);
+    handleAddBook = (img, title, author) => {
+        const newBook = this.createBook(img, title, author);
         this.setState(({books}) => {
             const newBooksArray = [
                 newBook,
@@ -124,17 +110,9 @@ class App extends Component {
             }
         });
     }
-    
-    handleChangeInput = ({currentTarget: input}) => {
-        const newBookData = {...this.state.newBookData};
-        newBookData[input.id] = input.value;
-        this.setState({
-            newBookData
-        })
-    }
 
     render() {
-        const { books, selectFilter, searchBook, isOpenNewBookModal, isOpenInfoModal } = this.state;
+        const { books, selectFilter, searchBook, isOpenNewBookModal } = this.state;
         const visibleBooks = this.getFilteredBook(
             this.search(books, searchBook), selectFilter
         );
@@ -142,7 +120,7 @@ class App extends Component {
             <div className="wrapper">
                 <div className='wrapper__sidebar'>
                     <div className="sidebar">
-                        <button className="sidebar__button" onClick={this.addNewBookModal}>
+                        <button className="sidebar__button" onClick={this.handleShowNewBookModal}>
                             <i className="fa fa-plus" /> ADD A BOOK
                         </button>
                     </div>
@@ -158,19 +136,9 @@ class App extends Component {
                 </div>
                 <ModalWindow
                     isOpenModal={isOpenNewBookModal}
-                    modal={this.addNewBookModal}
-                    onSubmit={this.handleAddBookSubmit}
-                    onChange={this.handleChangeInput}
-                    openInfoModal={this.addInfoModal}
+                    modal={this.handleShowNewBookModal}
+                    addBook={this.handleAddBook}
                 />
-                <Modal isOpen={isOpenInfoModal} toggle={this.addInfoModal}>
-                    <ModalBody className="app__modalBody">
-                        The book "{this.state.newBookData.title}" successfully added
-                    </ModalBody>
-                    <ModalFooter className="modal-window__footer">
-                        <Button className="modal-window__add-button" onClick={this.addInfoModal}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
                 <div className='wrapper__container'>
                     <div className="header">
                         <h2 className="header__title">Browse Available Books</h2>
