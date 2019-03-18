@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
-import book0 from '../img/book0.png';
+import book0 from '../../img/book0.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ModalWindow.scss';
 
@@ -101,6 +101,7 @@ class ModalWindow extends Component {
                 isbn: '',
                 summary: ''
             },
+            selectedSidebar: 'general'
         });
     }
 
