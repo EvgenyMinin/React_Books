@@ -2,8 +2,11 @@ $bgcolor: #eef1f8;
 $textColor: #41485b;
 $bgCancelButtonColor: #96b4ce;
 $bgAddButtonColor: #f2795a;
+$bgNavButtonColor: #96b4ce;
+$sidebarTextColor: #7a849f;
 
 .modal-window {
+    min-width: 700px;
     &__label {
         font-weight: bold;
         font-size: 12px;
@@ -16,6 +19,9 @@ $bgAddButtonColor: #f2795a;
         font-weight: bold;
         font-size: 22px;
         color: $textColor;
+    }
+    &__body {
+        padding: 0;
     }
     &__footer {
         background-color: $bgcolor;
@@ -42,4 +48,34 @@ $bgAddButtonColor: #f2795a;
         display: flex;
         justify-content: space-between;
     }
+    &__sidebar {
+        width: 200px;
+        background-color: $bgcolor;
+    }
+    &__form {
+        width: 500px;
+        padding: 1rem;
+    }
+}
+
+.sidebar__nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar__buttons {
+    font-size: 14px;
+    padding: 10px 20px;
+    border: 0;
+    text-align: left;
+    color: $sidebarTextColor;
+    background-color: $bgcolor;
+    &:focus {
+        outline: 0;
+    }
+}
+
+.sidebar-active {
+    background-color: $bgNavButtonColor;
+    color: white;
 }
