@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import book0 from '../../img/book0.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ModalWindow.scss';
+import VisibleForm from './../VisibleForm/index';
 
 class ModalWindow extends Component {
 
@@ -14,7 +15,9 @@ class ModalWindow extends Component {
             publisher: '',
             paperback: '',
             isbn: '',
-            summary: ''
+            summary: '',
+            genre: '',
+            image: '',
         },
         isOpenInfoModal: false,
         errors: {},
@@ -35,6 +38,8 @@ class ModalWindow extends Component {
         paperback: Joi.string().label('Paperback').allow(''),
         isbn: Joi.string().min(9).label('ISBN').required(),
         summary: Joi.string().label('Summary').allow(''),
+        genre: Joi.string().label('Genre').allow(''),
+        image: Joi.string().label('Image').allow(''),
     };
 
     validate = () => {
@@ -99,7 +104,9 @@ class ModalWindow extends Component {
                 publisher: '',
                 paperback: '',
                 isbn: '',
-                summary: ''
+                summary: '',
+                genre: '',
+                image: '',
             },
             selectedSidebar: 'general'
         });
@@ -147,81 +154,13 @@ class ModalWindow extends Component {
                                     {buttons}
                                 </div>
                             </div>
-                            <Form className="modal-window__form">
-                                <FormGroup>
-                                    <Label htmlFor="title" className="modal-window__label">Title<span style={{'color': 'red'}}>*</span></Label>
-                                        <Input
-                                            type="text"
-                                            name="title"
-                                            value={bookData.title}
-                                            className="modal-window__input"
-                                            placeholder="Enter Title"
-                                            onChange={this.handleChange}
-                                            error={errors.title}
-                                        />
-                                    {errors.title && <div className="alert alert-danger">{errors.title}</div>}
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="author" className="modal-window__label">Author<span style={{'color': 'red'}}>*</span></Label>
-                                        <Input
-                                            type="text"
-                                            name="author"
-                                            value={bookData.author}
-                                            className="modal-window__input"
-                                            placeholder="Enter Author"
-                                            onChange={this.handleChange}
-                                        />
-                                    {errors.author && <div className="alert alert-danger">{errors.author}</div>}
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="publisher" className="modal-window__label">Publisher<span style={{'color': 'red'}}>*</span></Label>
-                                        <Input
-                                            type="text"
-                                            name="publisher"
-                                            value={bookData.publisher}
-                                            className="modal-window__input"
-                                            placeholder="Enter Publisher"
-                                            onChange={this.handleChange}
-                                        />
-                                    {errors.publisher && <div className="alert alert-danger">{errors.publisher}</div>}
-                                </FormGroup>
-                                <div className="modal-window__items">
-                                    <FormGroup>
-                                        <Label htmlFor="paperback" className="modal-window__label">Paperback</Label>
-                                            <Input
-                                                type="text"
-                                                name="paperback"
-                                                value={bookData.paperback}
-                                                className="modal-window__input"
-                                                placeholder="Enter Paperback"
-                                                onChange={this.handleChange}
-                                            />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label htmlFor="isbn" className="modal-window__label">ISBN<span style={{'color': 'red'}}>*</span></Label>
-                                            <Input
-                                                type="text"
-                                                name="isbn"
-                                                value={bookData.isbn}
-                                                className="modal-window__input"
-                                                placeholder="Enter ISBN"
-                                                onChange={this.handleChange}
-                                            />
-                                        {errors.isbn && <div className="alert alert-danger">{errors.isbn}</div>}
-                                    </FormGroup>
-                                </div>
-                                <FormGroup>
-                                    <Label htmlFor="summary" className="modal-window__label">Summary</Label>
-                                        <Input
-                                            type="text"
-                                            name="summary"
-                                            value={bookData.summary}
-                                            className="modal-window__input"
-                                            placeholder="Enter Summary"
-                                            onChange={this.handleChange}
-                                        />
-                                </FormGroup>
-                            </Form>
+                            <VisibleForm
+                                selectedSidebar={selectedSidebar}
+                                onChange={this.handleChange}
+                                bookData={bookData}
+                                errors={errors}
+                            />
+                            
                         </div>
                     </ModalBody>
                     <ModalFooter className="modal-window__footer">
