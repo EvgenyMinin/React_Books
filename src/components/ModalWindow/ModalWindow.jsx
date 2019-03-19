@@ -17,7 +17,6 @@ class ModalWindow extends Component {
             isbn: '',
             summary: '',
             genre: '',
-            image: '',
         },
         isOpenInfoModal: false,
         errors: {},
@@ -39,7 +38,6 @@ class ModalWindow extends Component {
         isbn: Joi.string().min(9).label('ISBN').required(),
         summary: Joi.string().label('Summary').allow(''),
         genre: Joi.string().label('Genre').allow(''),
-        image: Joi.string().label('Image').allow(''),
     };
 
     validate = () => {
@@ -105,8 +103,7 @@ class ModalWindow extends Component {
                 paperback: '',
                 isbn: '',
                 summary: '',
-                genre: '',
-                image: '',
+                genre: ''
             },
             selectedSidebar: 'general'
         });

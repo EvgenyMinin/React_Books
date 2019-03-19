@@ -1,9 +1,9 @@
 import React from 'react';
-import './InfoForm';
+import './InfoForm.scss';
 
 const InfoForm = () => {
     return (
-        <h1>InfoForm</h1>
+        <h1 className="info-form">InfoForm</h1>
     );
 }
  

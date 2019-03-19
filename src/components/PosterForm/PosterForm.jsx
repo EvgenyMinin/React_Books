@@ -1,21 +1,9 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
-import './PosterForm';
+import './PosterForm.scss';
 
-const PosterForm = ({bookData, onChange}) => {
+const PosterForm = () => {
     return (
-        <Form className="modal-window__form">
-            <FormGroup>
-                <Label className="modal-window__label">Select poster</Label>
-                    <Input
-                        type="file"
-                        name="poster"
-                        value={bookData.image}
-                        className="modal-window__input"
-                        onChange={onChange}
-                    />
-            </FormGroup>
-        </Form>
+        <h1 className="poster-form">PosterForm</h1>
     );
 }
  

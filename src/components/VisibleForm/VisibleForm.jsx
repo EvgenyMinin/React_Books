@@ -12,7 +12,7 @@ const selectedSidebar = ({selectedSidebar, bookData, errors, onChange}) => {
         case 'genre':
             return <GenreForm bookData={bookData} onChange={onChange} selectedSidebar={selectedSidebar} />
         case 'poster':
-            return <PosterForm bookData={bookData} onChange={onChange} selectedSidebar={selectedSidebar} />
+            return <PosterForm />
         case 'info':
             return <InfoForm />
 
