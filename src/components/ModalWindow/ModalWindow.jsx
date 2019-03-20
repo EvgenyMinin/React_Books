@@ -9,7 +9,7 @@ import VisibleForm from './../VisibleForm/index';
 class ModalWindow extends Component {
 
     state = {
-        bookData: {
+        bookData: this.props.book || {
             title: '',
             author: '',
             publisher: '',
@@ -80,7 +80,7 @@ class ModalWindow extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const errors = this.validate();
-        this.props.addBook(book0, this.state.bookData.title, this.state.bookData.author);
+        this.props.addBook(book0, this.state.bookData.title, this.state.bookData.author, this.state.bookData.publisher, this.state.bookData.paperback, this.state.bookData.isbn, this.state.bookData.summary, this.state.bookData.genre);
         this.setState({
             errors: errors || {}
         });

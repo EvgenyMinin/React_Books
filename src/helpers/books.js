@@ -11,19 +11,24 @@ import book10 from '../img/Image-9.png';
 
 let maxId = 1;
 
-const createBook = (logo, title, author, isFree = false) => {
+const createBook = (logo, title, author, publisher = "", paperback = "", isbn = "", summary ="", genre = "", isFree = false) => {
     return {
         id: maxId++,
         logo,
         title,
         author,
+        publisher,
+        paperback,
+        isbn,
+        summary,
+        genre,
         isFree,
         rating: 0
     }
 }
 
 const initialBooks = [
-    createBook(book1, 'Jewels of Nizam', 'by Geeta Devi', true),
+    createBook(book1, 'Jewels of Nizam', 'by Geeta Devi', 'Rupa publications', 'paperback', '9788129124364', 'good book', 'Cookery, Food & Nutrition', true),
     createBook(book2, 'Cakes & Bakes', 'by Sanjeev Kapoor'),
     createBook(book3, 'Jamie’s Kitchen', 'by Jamie Oliver'),
     createBook(book4, 'Inexpensive Family Meals', 'by Simon Holst'),

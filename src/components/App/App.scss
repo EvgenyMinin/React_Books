@@ -81,12 +81,12 @@ body {
         list-style-type: none;
         color: $menuTextColor;
         font-size: 13px;
-        padding: 14px 20px;
+        padding: 12px 20px;
         &--active {
             list-style-type: none;
             color: $whiteTextColor;
             font-size: 13px;
-            padding: 14px 20px;
+            padding: 12px 20px;
             background-color: $menuActiveItemColor;
         }
     }

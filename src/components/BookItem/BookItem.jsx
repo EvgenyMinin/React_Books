@@ -8,12 +8,13 @@ const BookItem = ({
     title,
     author,
     rating,
-    onChangeRating
+    onChangeRating,
+    onClickBook
     }) => {
     return (
         <div className="book-item">
-            <div className="book-item__logo">
-                <img src={logo} alt=""/>
+            <div className="book-item__logo" onClick={() => onClickBook(id)}>
+                <img src={logo} alt="" />
             </div>
             <div className="book-item__title">{title}</div>
             <div className="book-item__author">{author}</div>

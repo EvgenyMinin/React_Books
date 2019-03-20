@@ -2,7 +2,7 @@ import React from 'react';
 import BookItem from './../BookItem';
 import './BookList.scss';
 
-const BookList = ({ books, onChangeRating }) => {
+const BookList = ({ books, onChangeRating, onClickBook }) => {
     return (
         books.map(book => (
             <div className="book-list"
@@ -15,6 +15,7 @@ const BookList = ({ books, onChangeRating }) => {
                     author={book.author}
                     rating={book.rating}
                     onChangeRating={onChangeRating}
+                    onClickBook={onClickBook}                    
                 />
             </div>
         ))
