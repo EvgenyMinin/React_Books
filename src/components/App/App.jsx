@@ -1,58 +1,19 @@
 import React, { Component } from 'react';
-import book1 from '../../img/Image.png';
-import book2 from '../../img/Image-1.png';
-import book3 from '../../img/Image-2.png';
-import book4 from '../../img/Image-3.png';
-import book5 from '../../img/Image-4.png';
-import book6 from '../../img/Image-5.png';
-import book7 from '../../img/Image-6.png';
-import book8 from '../../img/Image-7.png';
-import book9 from '../../img/Image-8.png';
-import book10 from '../../img/Image-9.png';
 import NavPanel from '../NavPanel';
 import BookList from '../BookList';
 import ModalWindow from '../ModalWindow/ModalWindow';
+import { getInitialBooks, search, createBook, saveBooksToLS } from '../../helpers/books';
 import './App.scss';
 
 class App extends Component {
-
-    maxId = 1;
-    createBook = (logo, title, author, isFree = false) => {
-        return {
-            id: this.maxId++,
-            logo,
-            title,
-            author,
-            isFree,
-            rating: 0
-        }
-    }
-
     state = {
-        books: [
-            this.createBook(book1, 'Jewels of Nizam', 'by Geeta Devi', true),
-            this.createBook(book2, 'Cakes & Bakes', 'by Sanjeev Kapoor'),
-            this.createBook(book3, 'Jamie’s Kitchen', 'by Jamie Oliver'),
-            this.createBook(book4, 'Inexpensive Family Meals', 'by Simon Holst'),
-            this.createBook(book5, 'Paleo Slow Cooking', 'by Chrissy Gower'),
-            this.createBook(book6, 'Cook Like an Italian', 'by Tobie Puttock'),
-            this.createBook(book7, 'Suneeta Vaswani', 'by Geeta Devi'),
-            this.createBook(book8, 'Jamie Does', 'by Jamie Oliver'),
-            this.createBook(book9, 'Jamie’s italy', 'by Jamie Oliver'),
-            this.createBook(book10, 'Vegetables Cookbook', 'by Matthew Biggs'),
-        ],
+        books: getInitialBooks(),
         selectFilter: 'all',
         searchBook: '',
         isOpenNewBookModal: false,
     }
 
-    search = (books, searchBook) => {
-        if (searchBook.length === 0) return books;
-        return books.filter( b => b.title
-            .toLowerCase()
-            .indexOf(searchBook.toLowerCase()) > -1
-        );
-    }
+    
 
     handleFilterChange = (selectFilter) => {
         this.setState({
@@ -84,6 +45,7 @@ class App extends Component {
         this.setState({
             books
         });
+        saveBooksToLS(books);
     }
 
     handleSearchChange = (searchBook) => {
@@ -99,22 +61,19 @@ class App extends Component {
     }
 
     handleAddBook = (img, title, author) => {
-        const newBook = this.createBook(img, title, author);
-        this.setState(({books}) => {
-            const newBooksArray = [
-                newBook,
-                ...books
-            ];
-            return {
-                books: newBooksArray,
-            }
+        const newBook = createBook(img, title, author);
+        const books = [newBook, ...this.state.books];
+        console.log(books);
+        saveBooksToLS(books);
+        this.setState({
+            books
         });
     }
 
     render() {
         const { books, selectFilter, searchBook, isOpenNewBookModal } = this.state;
         const visibleBooks = this.getFilteredBook(
-            this.search(books, searchBook), selectFilter
+            search(books, searchBook), selectFilter
         );
         return (
             <div className="wrapper">
