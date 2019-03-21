@@ -162,7 +162,10 @@ class ModalWindow extends Component {
                     </ModalBody>
                     <ModalFooter className="modal-window__footer">
                         <Button className="modal-window__cancel-button" onClick={modal}>CANCEL</Button>
-                        <Button className="modal-window__add-button" disabled={!!this.validate()} onClick={click} >ADD BOOK</Button>
+                        {this.props.book
+                            ? null
+                            : <Button className="modal-window__add-button" disabled={!!this.validate()} onClick={click} >ADD BOOK</Button>
+                        }
                     </ModalFooter>
                 </Modal>
                 <Modal isOpen={isOpenInfoModal} toggle={this.handleShowInfoModal}>
