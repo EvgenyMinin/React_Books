@@ -26,6 +26,7 @@ const BookItem = ({
                     onChange={ (newRating) => onChangeRating(id, newRating)}
                     numberOfStars={5}
                     name={title}
+                    className='react-stars'
                 />
             </div>
         </div>

@@ -82,6 +82,9 @@ body {
         color: $menuTextColor;
         font-size: 13px;
         padding: 12px 20px;
+        &-icon {
+            margin-right: 10px;
+        }
         &--active {
             list-style-type: none;
             color: $whiteTextColor;

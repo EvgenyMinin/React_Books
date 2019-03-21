@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import NavPanel from '../NavPanel';
 import BookList from '../BookList';
-import ModalWindow from '../ModalWindow/ModalWindow';
 import { getInitialBooks, search, createBook, saveBooksToLS } from '../../helpers/books';
+import { ModalWindow, ModalWindowInfo } from '../ModalWindow';
 import './App.scss';
 
 class App extends Component {
@@ -11,9 +11,10 @@ class App extends Component {
         selectFilter: 'all',
         searchBook: '',
         isOpenNewBookModal: false,
+        isOpenInfoModal: false,
+        currentBookId: null,
+        currentBookTitle: ''
     }
-
-    
 
     handleFilterChange = (selectFilter) => {
         this.setState({
@@ -54,33 +55,56 @@ class App extends Component {
         })
     }
 
-    handleShowNewBookModal = () => {
-        this.setState(prevState => {
-            return {
-                isOpenNewBookModal: !this.state.isOpenNewBookModal,
-                currentBookId: prevState.isOpenNewBookModal ? null : prevState.currentBookId
-            };
-        });
-    }
-
     handleAddBook = (img, title, author, publisher, paperback, isbn, summary, genre) => {
         const newBook = createBook(img, title, author, publisher, paperback, isbn, summary, genre);
         const books = [newBook, ...this.state.books];
         saveBooksToLS(books);
         this.setState({
-            books
+            books,
+            currentBookTitle: newBook.title
         });
     }
 
     handleClickBook = (id) => {
         this.setState({
             currentBookId: id,
-            isOpenNewBookModal: !this.state.isOpenNewBookModal
+            isOpenNewBookModal: true
+        });
+    }
+    
+    handleOpenModal = () => {
+        this.setState({
+            isOpenNewBookModal: true,
+            currentBookId: null
+        });
+    }
+
+    handleCloseModal = () => {
+        this.setState({
+            isOpenNewBookModal: false
+        });
+    }
+
+    handleShowInfoModal = () => {
+        this.setState({
+            isOpenInfoModal: true,
+        });
+    }
+
+    handleOpenInfoModal = () => {
+        this.setState({
+            isOpenInfoModal: true
+        });
+    }
+
+    handleCloseInfoModal = () => {
+        this.setState({
+            isOpenInfoModal: false
         });
     }
 
     render() {
-        const { books, currentBookId, selectFilter, searchBook, isOpenNewBookModal } = this.state;
+        const { books, currentBookId, selectFilter, searchBook, isOpenNewBookModal, isOpenInfoModal, currentBookTitle } = this.state;
         const visibleBooks = this.getFilteredBook(
             search(books, searchBook), selectFilter
         );
@@ -89,30 +113,30 @@ class App extends Component {
             <div className="wrapper">
                 <div className='wrapper__sidebar'>
                     <div className="sidebar">
-                        <button className="sidebar__button" onClick={this.handleShowNewBookModal}>
+                        <button className="sidebar__button" onClick={this.handleOpenModal}>
                             <i className="fa fa-plus" /> ADD A BOOK
                         </button>
                     </div>
                     <div className="menu-buttons">
                         <ul className="menu-buttons__block">
                             <li className="menu-buttons__item">
-                                <i className="fa fa-book mr-2"></i>
+                                <i className="menu-buttons__item-icon fa fa-book mr-2"></i>
                                 Now Reading
                             </li>
                             <li className="menu-buttons__item--active">
-                                <i className="fa fa-globe mr-2"></i>
+                                <i className="menu-buttons__item-icon fa fa-globe mr-2"></i>
                                 Browse
                             </li>
                             <li className="menu-buttons__item">
-                                <i className="fa fa-shopping-cart mr-2"></i>
+                                <i className="menu-buttons__item-icon fa fa-shopping-cart mr-2"></i>
                                 Buy Books
                             </li>
                             <li className="menu-buttons__item">
-                                <i className="fa fa-star mr-2"></i>
+                                <i className="menu-buttons__item-icon fa fa-star mr-2"></i>
                                 Favourite Books
                             </li>
                             <li className="menu-buttons__item">
-                                <i className="fa fa-th-list mr-2"></i>
+                                <i className="menu-buttons__item-icon fa fa-th-list mr-2"></i>
                                 Wishlist
                             </li>
                         </ul>
@@ -120,10 +144,18 @@ class App extends Component {
                 </div>
                 {isOpenNewBookModal && (
                     <ModalWindow
-                        isOpenModal={isOpenNewBookModal}
-                        modal={this.handleShowNewBookModal}
+                        onCloseModal={this.handleCloseModal}
                         addBook={this.handleAddBook}
+                        isOpenNewBookModal={isOpenNewBookModal}
                         book={currentBook}
+                        onOpenInfoModal={this.handleOpenInfoModal}
+                    />
+                )}
+                {isOpenInfoModal && (
+                    <ModalWindowInfo
+                        isOpenInfoModal={isOpenInfoModal}
+                        onCloseInfoModal={this.handleCloseInfoModal}
+                        currentBookTitle={currentBookTitle}
                     />
                 )}
                 <div className='wrapper__container'>

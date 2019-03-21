@@ -1,36 +1,112 @@
 $bgcolor: #eef1f8;
 $textColor: #41485b;
+$titleColor: #444c63;
+$borderColor: #dbdee7;
 $bgCancelButtonColor: #96b4ce;
 $bgAddButtonColor: #f2795a;
 $bgNavButtonColor: #96b4ce;
 $sidebarTextColor: #7a849f;
 
 .modal-window {
-    min-width: 700px;
+    width: 700px;
+    position: absolute;
+    top: 13%;
+    left: 50%;
+    transform: translateX(-50%);
+    outline: 0;
+    &--info {
+        width: 500px;
+        position: absolute;
+        top: 13%;
+        left: 50%;
+        transform: translateX(-50%);
+        outline: 0;
+    }
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .8);
+    }
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: $bgcolor;
+        color: $titleColor;
+        padding: 0 20px;
+        border-radius: 10px 10px 0 0;
+        border-bottom: 1px solid $borderColor;
+        &--close {
+            background-color: inherit;
+            border: 0;
+            color: $textColor;
+            cursor: pointer;
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
+    &__body {
+        display: flex;
+        border-bottom: 1px solid $borderColor;
+        background-color: #fff;
+        &--info {
+            background-color: #fff;
+            color: $textColor;
+            font-weight: bold;
+            font-size: 28px;
+            text-align: center;
+            padding: 40px 10px;
+            border-radius: 10px 10px 0 0;
+        }
+    }
+    &__sidebar {
+        min-width: 200px;
+        background-color: $bgcolor;
+    }
+    // &__form {
+    //     padding: 1rem;
+    // }
+    &__content {
+        width: 100%;
+        padding: 1rem 0 1rem 1rem;
+    }
     &__label {
+        margin: 10px 0;
         font-weight: bold;
         font-size: 12px;
     }
     &__input {
-        padding: 3px 6px;
+        width: 97%;
+        padding: 7px;
+        border: 1px solid #ccc;
+        &-item {
+            margin-bottom: 1rem;
+            margin-right: 1rem;
+            flex: 1;
+        }
     }
-    &__header {
-        background-color: $bgcolor;
-        font-weight: bold;
-        font-size: 22px;
-        color: $textColor;
-    }
-    &__body {
-        padding: 0;
+    &__group {
+        display: flex;
+        justify-content: space-between;
     }
     &__footer {
         background-color: $bgcolor;
+        padding: 1rem;
+        text-align: right;
+        border-radius: 0 0 10px 10px;
     }
     &__cancel-button {
         background-color: $bgCancelButtonColor;
         border: 0;
+        border-radius: 5px;
         font-size: 14px;
         font-weight: bold;
+        color: #fff;
+        padding: 10px 15px;
+        cursor: pointer;
         &:hover {
             background-color: #748ea5;
         }
@@ -38,23 +114,26 @@ $sidebarTextColor: #7a849f;
     &__add-button {
         background-color: $bgAddButtonColor;
         border: 0;
+        border-radius: 5px;
         font-size: 14px;
         font-weight: bold;
+        color: #fff;
+        padding: 10px 15px;
+        margin-left: 10px;
+        cursor: pointer;
         &:hover {
             background-color: #da5837;
         }
+        &:disabled {
+            cursor: default;
+            background-color: $bgCancelButtonColor;
+        }
     }
-    &__items {
-        display: flex;
-        justify-content: space-between;
-    }
-    &__sidebar {
-        width: 200px;
-        background-color: $bgcolor;
-    }
-    &__form {
-        width: 500px;
-        padding: 1rem;
+    &__error {
+        background-color: #f7d7da;
+        padding: 10px;
+        color: #652b2a;
+        border-radius: 0 0 5px 5px;
     }
 }
 
@@ -70,6 +149,7 @@ $sidebarTextColor: #7a849f;
     text-align: left;
     color: $sidebarTextColor;
     background-color: $bgcolor;
+    cursor: pointer;
     &:focus {
         outline: 0;
     }
@@ -79,3 +159,97 @@ $sidebarTextColor: #7a849f;
     background-color: $bgNavButtonColor;
     color: white;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $bgcolor: #eef1f8;
+// $textColor: #41485b;
+// $bgCancelButtonColor: #96b4ce;
+// $bgAddButtonColor: #f2795a;
+// $bgNavButtonColor: #96b4ce;
+// $sidebarTextColor: #7a849f;
+
+// .modal-window {
+//     min-width: 700px;
+//     &__label {
+//         font-weight: bold;
+//         font-size: 12px;
+//     }
+//     &__input {
+//         padding: 3px 6px;
+//     }
+//     &__header {
+//         background-color: $bgcolor;
+//         font-weight: bold;
+//         font-size: 22px;
+//         color: $textColor;
+//     }
+//     &__body {
+//         padding: 0;
+//     }
+//     &__footer {
+//         background-color: $bgcolor;
+//     }
+//     &__cancel-button {
+//         background-color: $bgCancelButtonColor;
+//         border: 0;
+//         font-size: 14px;
+//         font-weight: bold;
+//         &:hover {
+//             background-color: #748ea5;
+//         }
+//     }
+//     &__add-button {
+//         background-color: $bgAddButtonColor;
+//         border: 0;
+//         font-size: 14px;
+//         font-weight: bold;
+//         &:hover {
+//             background-color: #da5837;
+//         }
+//     }
+//     &__items {
+//         display: flex;
+//         justify-content: space-between;
+//     }
+//     &__sidebar {
+//         width: 200px;
+//         background-color: $bgcolor;
+//     }
+//     &__form {
+//         width: 500px;
+//         padding: 1rem;
+//     }
+// }
+
+// .sidebar__nav {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .sidebar__buttons {
+//     font-size: 14px;
+//     padding: 10px 20px;
+//     border: 0;
+//     text-align: left;
+//     color: $sidebarTextColor;
+//     background-color: $bgcolor;
+//     &:focus {
+//         outline: 0;
+//     }
+// }
+
+// .sidebar-active {
+//     background-color: $bgNavButtonColor;
+//     color: white;
+// }

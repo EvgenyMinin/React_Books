@@ -1,3 +1,7 @@
 import ModalWindow from './ModalWindow';
+import ModalWindowInfo from './ModalWindowInfo';
 
-export default ModalWindow;
+export {
+    ModalWindow,
+    ModalWindowInfo
+};

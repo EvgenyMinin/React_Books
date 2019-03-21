@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import ReactModal from 'react-modal';
 import book0 from '../../img/book0.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './ModalWindow.scss';
 import VisibleForm from './../VisibleForm/index';
 
@@ -20,7 +19,8 @@ class ModalWindow extends Component {
         },
         isOpenInfoModal: false,
         errors: {},
-        selectedSidebar: 'general'
+        selectedSidebar: 'general',
+        isOpenNewBookModal: false
     };
 
     buttons = [
@@ -35,7 +35,7 @@ class ModalWindow extends Component {
         author: Joi.string().label('Author').required(),
         publisher: Joi.string().label('Publisher').required(),
         paperback: Joi.string().label('Paperback').allow(''),
-        isbn: Joi.string().min(9).label('ISBN').required(),
+        isbn: Joi.number().min(9).label('ISBN').required(),
         summary: Joi.string().label('Summary').allow(''),
         genre: Joi.string().label('Genre').allow(''),
     };
@@ -87,28 +87,6 @@ class ModalWindow extends Component {
         if (errors) return;
     }
 
-    handleShowInfoModal = () => {
-        this.setState({
-            isOpenInfoModal: true,
-        });
-    }
-
-    handleHideInfoModal = () => {
-        this.setState({
-            isOpenInfoModal: false,
-            bookData: {
-                title: '',
-                author: '',
-                publisher: '',
-                paperback: '',
-                isbn: '',
-                summary: '',
-                genre: ''
-            },
-            selectedSidebar: 'general'
-        });
-    }
-
     handleSidebarChange = (selectedSidebar) => {
         this.setState({
             selectedSidebar
@@ -116,12 +94,12 @@ class ModalWindow extends Component {
     }
 
     render() {
-        const { isOpenInfoModal, bookData, errors, selectedSidebar } = this.state;
-        const { isOpenModal, modal } = this.props;
+        const { bookData, errors, selectedSidebar } = this.state;
+        const { onCloseModal, isOpenNewBookModal, onOpenInfoModal } = this.props;
         const click = (event) => {
             this.handleSubmit(event);
-            this.handleShowInfoModal();
-            modal();
+            onOpenInfoModal();
+            onCloseModal();
         };
         const buttons = this.buttons.map(({name, label, icon}) => {
             const isActive = selectedSidebar === name;
@@ -138,44 +116,39 @@ class ModalWindow extends Component {
         });
         return (
             <React.Fragment>
-                <Modal className="modal-window" isOpen={isOpenModal} toggle={modal}>
-                    <ModalHeader toggle={modal} className="modal-window__header">
-                        <div className="modal-window__header">
-                            Add New Books
-                        </div>
-                    </ModalHeader>
-                    <ModalBody className="modal-window__body">
-                        <div className="d-flex">
-                            <div className="modal-window__sidebar">
-                                <div className="sidebar__nav">
-                                    {buttons}
-                                </div>
+                <ReactModal
+                    isOpen={isOpenNewBookModal}
+                    className="modal-window"
+                    overlayClassName="modal-window__overlay"
+                    ariaHideApp={false}
+                >
+                    <div className="modal-window__header">
+                        <h2>Add New Books</h2>
+                        <button className='modal-window__header--close fa fa-times' onClick={onCloseModal} />
+                    </div>
+                    <div className="modal-window__body">
+                        <div className="modal-window__sidebar">
+                            <div className="sidebar__nav">
+                                {buttons}
                             </div>
+                        </div>
+                        <div className="modal-window__content">
                             <VisibleForm
                                 selectedSidebar={selectedSidebar}
                                 onChange={this.handleChange}
                                 bookData={bookData}
                                 errors={errors}
                             />
-                            
                         </div>
-                    </ModalBody>
-                    <ModalFooter className="modal-window__footer">
-                        <Button className="modal-window__cancel-button" onClick={modal}>CANCEL</Button>
-                        {this.props.book
-                            ? null
-                            : <Button className="modal-window__add-button" disabled={!!this.validate()} onClick={click} >ADD BOOK</Button>
-                        }
-                    </ModalFooter>
-                </Modal>
-                <Modal isOpen={isOpenInfoModal} toggle={this.handleShowInfoModal}>
-                    <ModalBody className="app__modalBody">
-                        The book "{bookData.title}" successfully added
-                    </ModalBody>
-                    <ModalFooter className="modal-window__footer">
-                        <Button className="modal-window__add-button" onClick={this.handleHideInfoModal}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
+                    </div>
+                    <div className="modal-window__footer">
+                        <button className="modal-window__cancel-button" onClick={onCloseModal}>CANCEL</button>
+                            {this.props.book
+                                ? null
+                                : <button className="modal-window__add-button" disabled={!!this.validate()} onClick={click} >ADD BOOK</button>
+                            }
+                    </div>
+                </ReactModal>
             </React.Fragment>
         );
     }
