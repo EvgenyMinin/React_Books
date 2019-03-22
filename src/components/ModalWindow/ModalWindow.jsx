@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 import book0 from '../../img/book0.png';
 import './ModalWindow.scss';
 import VisibleForm from './../VisibleForm/index';
+import VisibleInfo from './../VisibleInfo/VisibleInfo';
 
 class ModalWindow extends Component {
 
@@ -95,7 +96,7 @@ class ModalWindow extends Component {
 
     render() {
         const { bookData, errors, selectedSidebar } = this.state;
-        const { onCloseModal, isOpenNewBookModal, onOpenInfoModal } = this.props;
+        const { onCloseModal, isOpenNewBookModal, onOpenInfoModal, book } = this.props;
         const click = (event) => {
             this.handleSubmit(event);
             onOpenInfoModal();
@@ -123,7 +124,7 @@ class ModalWindow extends Component {
                     ariaHideApp={false}
                 >
                     <div className="modal-window__header">
-                        <h2>Add New Books</h2>
+                        {book ? <h2>Info about {bookData.title}</h2> : <h2>Add New Books</h2>}
                         <button className='modal-window__header--close fa fa-times' onClick={onCloseModal} />
                     </div>
                     <div className="modal-window__body">
@@ -133,17 +134,23 @@ class ModalWindow extends Component {
                             </div>
                         </div>
                         <div className="modal-window__content">
-                            <VisibleForm
-                                selectedSidebar={selectedSidebar}
-                                onChange={this.handleChange}
-                                bookData={bookData}
-                                errors={errors}
-                            />
+                        {book
+                            ?   <VisibleInfo
+                                    selectedSidebar={selectedSidebar}
+                                    bookData={bookData}
+                                />
+                            :   <VisibleForm
+                                    selectedSidebar={selectedSidebar}
+                                    onChange={this.handleChange}
+                                    bookData={bookData}
+                                    errors={errors}
+                                />
+                        }
                         </div>
                     </div>
                     <div className="modal-window__footer">
-                        <button className="modal-window__cancel-button" onClick={onCloseModal}>CANCEL</button>
-                            {this.props.book
+                        <button className="modal-window__cancel-button" onClick={onCloseModal}>{book ? 'CLOSE' : 'CANCEL'}</button>
+                            {book
                                 ? null
                                 : <button className="modal-window__add-button" disabled={!!this.validate()} onClick={click} >ADD BOOK</button>
                             }

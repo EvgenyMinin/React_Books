@@ -8,9 +8,9 @@ const selectedSidebar = ({selectedSidebar, bookData, errors, onChange}) => {
 
     switch(selectedSidebar) {
         case 'general':
-            return <GeneralForm bookData={bookData} errors={errors} selectedSidebar={selectedSidebar} onChange={onChange}/>;
+            return <GeneralForm bookData={bookData} errors={errors} onChange={onChange}/>;
         case 'genre':
-            return <GenreForm bookData={bookData} onChange={onChange} selectedSidebar={selectedSidebar} />
+            return <GenreForm bookData={bookData} onChange={onChange} />
         case 'poster':
             return <PosterForm />
         case 'info':
